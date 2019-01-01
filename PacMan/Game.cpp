@@ -1,6 +1,8 @@
 #include "Game.h"
 #include <iostream>
 
+//here takes place the gameloop
+//and drawwing/drawing
 
 Game::Game()
 :m_window(sf::VideoMode(640,480),"PacMan")
@@ -27,33 +29,33 @@ void Game::run()
 			if (event.type == sf::Event::KeyPressed)
 			{
 				if (event.key.code == sf::Keyboard::S)
-					pressStart();
+					m_currentState->pressStart();			// every state has it's own methods
 				
 				if (event.key.code == sf::Keyboard::Up)
-					movePacman(sf::Vector2i(0, -1));
+					m_currentState->movePacman(sf::Vector2i(0, -1));
 				if (event.key.code == sf::Keyboard::Down)
-					movePacman(sf::Vector2i(0, 1));
+					m_currentState->movePacman(sf::Vector2i(0, 1));
 				if (event.key.code == sf::Keyboard::Left)
-					movePacman(sf::Vector2i(-1, 0));
+					m_currentState->movePacman(sf::Vector2i(-1, 0));
 				if (event.key.code == sf::Keyboard::Right)
-					movePacman(sf::Vector2i(1, 0));
+					m_currentState->movePacman(sf::Vector2i(1, 0));
 
 			}
 		}
-
+		m_currentState->update(sf::seconds(1));			// seconds (1.0f) ?? sprawdz
 		m_window.clear();
 		// draw  something here
+		m_currentState->draw(m_window);
 		m_window.display();
 	}
 }
 
-void Game::pressStart()
+void Game::changeGameState(GameState::State next_gameState)
 {
-	std::cout << "Kliknales start" << std::endl;
+	//TO DO:
+	//changing game states
 }
 
-void Game::movePacman(sf::Vector2i direction)
-{
-	std::cout << "Pacman sie rusza" << std::endl;
-}
+
+
 
