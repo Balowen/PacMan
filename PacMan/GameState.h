@@ -15,9 +15,9 @@ public:
 	enum State		// all possible game states
 	{
 		GetReady,
-		Playing,
-		Win,
-		Lost
+		Play,
+		Victory,
+		Defeat
 	};
 
 	Game* getGame() const;							//https://stackoverflow.com/questions/2156634/why-is-a-pure-virtual-function-initialized-by-0
@@ -33,6 +33,7 @@ private:
 };
 
 // GAME STATES			every gamestate inherits from gamestate class
+
 class GetReadyState : public GameState
 {
 public:
@@ -41,5 +42,38 @@ public:
 	void pressStart();
 	void movePacman(sf::Vector2i direction);
 	void update(sf::Time delta);
-	void draw(sf::RenderWindow& window);		// RenderWindow&  refere
+	void draw(sf::RenderWindow& window);		// RenderWindow&  refererencja
+};
+
+class PlayState : public GameState
+{
+public:
+	PlayState(Game* game);
+
+	void pressStart();
+	void movePacman(sf::Vector2i direction);
+	void update(sf::Time delta);
+	void draw(sf::RenderWindow& window);		
+};
+
+class VictoryState : public GameState
+{
+public:
+	VictoryState(Game* game);
+
+	void pressStart();
+	void movePacman(sf::Vector2i direction);
+	void update(sf::Time delta);
+	void draw(sf::RenderWindow& window);
+};
+
+class DefeatState : public GameState
+{
+public:
+	DefeatState(Game* game);
+
+	void pressStart();
+	void movePacman(sf::Vector2i direction);
+	void update(sf::Time delta);
+	void draw(sf::RenderWindow& window);
 };
