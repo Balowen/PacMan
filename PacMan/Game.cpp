@@ -5,7 +5,7 @@
 //and drawwing/drawing
 
 Game::Game()
-:m_window(sf::VideoMode(640,480),"PacMan")
+:m_window(sf::VideoMode(640, 480), "PacMan", sf::Style::Close)
 {
 	if (!m_font.loadFromFile("assets/font.ttf"))
 		throw std::runtime_error("Blad wczytywania czcionki");
@@ -22,7 +22,7 @@ Game::Game()
 	m_gameStates[GameState::State::Victory] = new VictoryState(this);
 	m_gameStates[GameState::State::Defeat] = new DefeatState(this);
 
-	changeGameState(GameState::State::GetReady);	//initial state, when game launches
+	changeGameState(GameState::State::Menu);	//initial state, when game launches
 }
 
 
@@ -46,7 +46,7 @@ void Game::run()
 			// if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))  it is better for const pressing button
 			if (event.type == sf::Event::KeyPressed)
 			{
-				if (event.key.code == sf::Keyboard::S)
+				if (event.key.code == sf::Keyboard::Space)
 					m_currentState->pressStart();			// every state has it's own methods
 				
 				if (event.key.code == sf::Keyboard::Up)

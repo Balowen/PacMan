@@ -1,4 +1,6 @@
 #include "GameState.h"
+#include "Game.h"
+#include <iostream>
 
 
 
@@ -15,6 +17,21 @@ GameState::~GameState()
 MenuState::MenuState(Game* game)
 :GameState(game)
 {
+	m_sprite.setTexture(game->getGameLogo());
+	m_sprite.setPosition(60, 50);
+	/*sf::Vector2f scale = m_sprite.getScale();			// will do for now, center it later
+	std::cout << scale.x << scale.y << std::endl;*/
+	m_sprite.setScale(0.7,0.7);
+
+	m_text.setFont(game->getFont());
+	m_text.setString("START GAME");
+	m_text.setPosition(160, 240);
+	m_text.setCharacterSize(45);
+
+	m_instruction.setFont(game->getFont());
+	m_instruction.setString("Press space to play");
+	m_instruction.setPosition(30, 430);
+
 }
 
 GetReadyState::GetReadyState(Game* game)
@@ -37,13 +54,14 @@ DefeatState::DefeatState(Game* game)
 {
 }
 
-Game* GameState::getGame() const
+Game* GameState::getGame() const		//dziêki tej metodzie zmieniam stany gry
 {
 	return m_game;
 }
 
 void MenuState::pressStart()
-{// TO DO !!!!!!!!
+{
+	getGame()->changeGameState(GameState::GetReady);
 }
 
 void MenuState::movePacman(sf::Vector2i direction)
@@ -55,7 +73,10 @@ void MenuState::update(sf::Time delta)
 }
 
 void MenuState::draw(sf::RenderWindow & window)
-{// TO DO !!!!!!!!
+{
+	window.draw(m_sprite);
+	window.draw(m_text);
+	window.draw(m_instruction);
 }
 
 void GetReadyState::pressStart()
