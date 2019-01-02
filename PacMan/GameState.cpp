@@ -28,15 +28,18 @@ MenuState::MenuState(Game* game)
 	m_text.setPosition(160, 240);
 	m_text.setCharacterSize(45);
 
-	m_instruction.setFont(game->getFont());
-	m_instruction.setString("Press space to play");
-	m_instruction.setPosition(30, 430);
+	m_text2.setFont(game->getFont());
+	m_text2.setString("Press space to play");
+	m_text2.setPosition(30, 430);
 
 }
 
 GetReadyState::GetReadyState(Game* game)
 :GameState(game)
 {
+	m_text.setFont(game->getFont());
+	m_text.setString("PRESS SPACE IF YOU ARE READY");
+	m_text.setPosition(50, 220);
 }
 
 PlayState::PlayState(Game* game)
@@ -76,11 +79,12 @@ void MenuState::draw(sf::RenderWindow & window)
 {
 	window.draw(m_sprite);
 	window.draw(m_text);
-	window.draw(m_instruction);
+	window.draw(m_text2);
 }
 
 void GetReadyState::pressStart()
-{// TO DO !!!!!!!!
+{
+	getGame()->changeGameState(GameState::Play);
 }
 
 void GetReadyState::movePacman(sf::Vector2i direction)
@@ -92,7 +96,8 @@ void GetReadyState::update(sf::Time delta)
 }
 
 void GetReadyState::draw(sf::RenderWindow & window)
-{// TO DO !!!!!!!!
+{
+	window.draw(m_text);
 }
 
 void PlayState::pressStart()

@@ -47,7 +47,7 @@ public:
 
 private:
 	sf::Text m_text;
-	sf::Text m_instruction;
+	sf::Text m_text2;
 	sf::Sprite m_sprite;
 };
 
@@ -60,6 +60,9 @@ public:
 	void movePacman(sf::Vector2i direction);
 	void update(sf::Time delta);
 	void draw(sf::RenderWindow& window);		// RenderWindow&  refererencja
+
+private:
+	sf::Text m_text;
 };
 
 class PlayState : public GameState
