@@ -17,7 +17,8 @@ public:
 		GetReady,
 		Play,
 		Victory,
-		Defeat
+		Defeat,
+		Counter			//ile jest stanow
 	};
 
 	Game* getGame() const;							//https://stackoverflow.com/questions/2156634/why-is-a-pure-virtual-function-initialized-by-0

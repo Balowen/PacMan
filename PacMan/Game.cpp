@@ -7,10 +7,21 @@
 Game::Game()
 :m_window(sf::VideoMode(640,480),"PacMan")
 {
+	m_gameStates[GameState::State::GetReady] = new GetReadyState(this);
+	m_gameStates[GameState::State::Play] = new PlayState(this);
+	m_gameStates[GameState::State::Victory] = new VictoryState(this);
+	m_gameStates[GameState::State::Defeat] = new DefeatState(this);
 
+	changeGameState(GameState::State::GetReady);	//initial state, when game launches
 }
 
 
+Game::~Game()
+{
+	//https://en.cppreference.com/w/cpp/language/range-for		range-based loop
+	for (GameState* gamestate : m_gameStates)		//moge tak zrobic, ale musi byc ten sam typ
+		delete gamestate;											//danych co w vector
+}
 
 void Game::run()
 {
@@ -49,10 +60,9 @@ void Game::run()
 
 void Game::changeGameState(GameState::State next_gameState)
 {
-	//TO DO:
-	//changing game states
-}
+	m_currentState = m_gameStates[next_gameState];
 
+}
 
 
 
