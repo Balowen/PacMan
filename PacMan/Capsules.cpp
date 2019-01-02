@@ -2,10 +2,20 @@
 
 sf::CircleShape dot()
 {
-	return sf::CircleShape();
+	sf::CircleShape dot;
+	dot.setRadius(3);
+	dot.setFillColor(sf::Color::White);
+	dot.setOrigin(3, 3);
+
+	return dot;
 }
 
 sf::CircleShape bigDot()
 {
-	return sf::CircleShape();
+	sf::CircleShape bigDot;
+	bigDot.setRadius(6);
+	bigDot.setFillColor(sf::Color::White);
+	bigDot.setOrigin(6, 6);
+
+	return bigDot;
 }
