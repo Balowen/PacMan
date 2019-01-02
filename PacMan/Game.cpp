@@ -7,6 +7,16 @@
 Game::Game()
 :m_window(sf::VideoMode(640,480),"PacMan")
 {
+	if (!m_font.loadFromFile("assets/font.ttf"))
+		throw std::runtime_error("Blad wczytywania czcionki");
+
+	if (!m_gameLogo.loadFromFile("assets/logo.png"))
+		throw std::runtime_error("Blad wczytywania logo gry");
+
+	if (!m_texture.loadFromFile("assets/texture.png"))
+		throw std::runtime_error("Blad wczytywania tekstur");
+	 
+	m_gameStates[GameState::State::Menu] = new MenuState(this);
 	m_gameStates[GameState::State::GetReady] = new GetReadyState(this);
 	m_gameStates[GameState::State::Play] = new PlayState(this);
 	m_gameStates[GameState::State::Victory] = new VictoryState(this);
@@ -62,6 +72,21 @@ void Game::changeGameState(GameState::State next_gameState)
 {
 	m_currentState = m_gameStates[next_gameState];
 
+}
+
+sf::Font & Game::getFont()
+{
+	return m_font;
+}
+
+sf::Texture & Game::getTexture()
+{
+	return m_texture;
+}
+
+sf::Texture & Game::getGameLogo()
+{
+	return m_gameLogo;
 }
 
 

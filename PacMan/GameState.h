@@ -14,6 +14,7 @@ public:
 
 	enum State		// all possible game states
 	{
+		Menu,
 		GetReady,
 		Play,
 		Victory,
@@ -34,6 +35,16 @@ private:
 };
 
 // GAME STATES			every gamestate inherits from gamestate class
+class MenuState : public GameState
+{
+public:
+	MenuState(Game* game);
+
+	void pressStart();
+	void movePacman(sf::Vector2i direction);
+	void update(sf::Time delta);
+	void draw(sf::RenderWindow& window);
+};
 
 class GetReadyState : public GameState
 {

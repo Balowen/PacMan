@@ -12,6 +12,11 @@ GameState::~GameState()
 {
 }
 
+MenuState::MenuState(Game* game)
+:GameState(game)
+{
+}
+
 GetReadyState::GetReadyState(Game* game)
 :GameState(game)
 {
@@ -35,6 +40,22 @@ DefeatState::DefeatState(Game* game)
 Game* GameState::getGame() const
 {
 	return m_game;
+}
+
+void MenuState::pressStart()
+{// TO DO !!!!!!!!
+}
+
+void MenuState::movePacman(sf::Vector2i direction)
+{// TO DO !!!!!!!!
+}
+
+void MenuState::update(sf::Time delta)
+{// TO DO !!!!!!!!
+}
+
+void MenuState::draw(sf::RenderWindow & window)
+{// TO DO !!!!!!!!
 }
 
 void GetReadyState::pressStart()
