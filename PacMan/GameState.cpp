@@ -142,7 +142,11 @@ void VictoryState::movePacman(sf::Vector2i direction)
 }
 
 void VictoryState::update(sf::Time delta)
-{// TO DO !!!!!!!!
+{
+	static sf::Time buff = sf::Time::Zero;
+	buff = buff + delta;
+	if (buff.asSeconds() > 5)
+		getGame()->changeGameState(GameState::GetReady);
 }
 
 void VictoryState::draw(sf::RenderWindow & window)
