@@ -85,6 +85,10 @@ public:
 	void movePacman(sf::Vector2i direction);
 	void update(sf::Time delta);
 	void draw(sf::RenderWindow& window);
+
+private:
+	sf::Text m_text;
+
 };
 
 class DefeatState : public GameState
@@ -96,4 +100,8 @@ public:
 	void movePacman(sf::Vector2i direction);
 	void update(sf::Time delta);
 	void draw(sf::RenderWindow& window);
+
+private:
+	sf::Text m_text;
+	sf::Text m_text2;
 };

@@ -25,8 +25,8 @@ MenuState::MenuState(Game* game)
 
 	m_text.setFont(game->getFont());
 	m_text.setString("START GAME");
-	m_text.setPosition(160, 240);
-	m_text.setCharacterSize(45);
+	m_text.setPosition(640 / 2.0f, 480 / 2.0f);
+	m_text.setOrigin(m_text.getLocalBounds().width / 2.0f, m_text.getLocalBounds().height / 2.0f);
 
 	m_text2.setFont(game->getFont());
 	m_text2.setString("Press space to play");
@@ -39,7 +39,8 @@ GetReadyState::GetReadyState(Game* game)
 {
 	m_text.setFont(game->getFont());
 	m_text.setString("PRESS SPACE IF YOU ARE READY");
-	m_text.setPosition(50, 220);
+	m_text.setPosition(640 / 2.0f, 480 / 2.0f);
+	m_text.setOrigin(m_text.getLocalBounds().width / 2.0f, m_text.getLocalBounds().height / 2.0f);
 }
 
 PlayState::PlayState(Game* game)
@@ -50,11 +51,23 @@ PlayState::PlayState(Game* game)
 VictoryState::VictoryState(Game* game)
 :GameState(game)
 {
+	m_text.setFont(game->getFont());
+	m_text.setString("VICTORY");
+	m_text.setPosition(640 / 2.0f, 480 / 2.0f);
+	m_text.setOrigin(m_text.getLocalBounds().width / 2.0f, m_text.getLocalBounds().height / 2.0f);
 }
 
 DefeatState::DefeatState(Game* game)
 :GameState(game)
 {
+	m_text.setFont(game->getFont());
+	m_text.setString("You lost");
+	m_text.setPosition(640 / 2.0f, 480 / 2.0f);
+	m_text.setOrigin(m_text.getLocalBounds().width / 2.0f, m_text.getLocalBounds().height / 2.0f);
+
+	m_text2.setFont(game->getFont());
+	m_text2.setString("Press space to exit to menu");
+	m_text2.setPosition(20, 430);
 }
 
 Game* GameState::getGame() const		//dziêki tej metodzie zmieniam stany gry
@@ -105,7 +118,11 @@ void PlayState::pressStart()
 }
 
 void PlayState::movePacman(sf::Vector2i direction)
-{// TO DO !!!!!!!!
+{
+	if (direction.x == -1)
+		getGame()->changeGameState(GameState::Victory);	//just to check if it works
+	else if (direction.x == 1)
+		getGame()->changeGameState(GameState::Defeat);
 }
 
 void PlayState::update(sf::Time delta)
@@ -129,11 +146,13 @@ void VictoryState::update(sf::Time delta)
 }
 
 void VictoryState::draw(sf::RenderWindow & window)
-{// TO DO !!!!!!!!
+{
+	window.draw(m_text);
 }
 
 void DefeatState::pressStart()
-{// TO DO !!!!!!!!
+{
+	getGame()->changeGameState(GameState::Menu);
 }
 
 void DefeatState::movePacman(sf::Vector2i direction)
@@ -145,5 +164,7 @@ void DefeatState::update(sf::Time delta)
 }
 
 void DefeatState::draw(sf::RenderWindow & window)
-{// TO DO !!!!!!!!
+{
+	window.draw(m_text);
+	window.draw(m_text2);
 }

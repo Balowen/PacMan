@@ -35,6 +35,8 @@ Game::~Game()
 
 void Game::run()
 {
+	sf::Clock clock;
+
 	while (m_window.isOpen())
 	{
 		sf::Event event;
@@ -60,7 +62,7 @@ void Game::run()
 
 			}
 		}
-		m_currentState->update(sf::seconds(1));			// seconds (1.0f) ?? sprawdz
+		m_currentState->update(clock.restart());			// seconds (1.0f) ?? sprawdz
 		m_window.clear();
 		// draw  something here
 		m_currentState->draw(m_window);
