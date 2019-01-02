@@ -53,8 +53,10 @@ VictoryState::VictoryState(Game* game)
 {
 	m_text.setFont(game->getFont());
 	m_text.setString("VICTORY");
+	m_text.setCharacterSize(43);
 	m_text.setPosition(640 / 2.0f, 480 / 2.0f);
 	m_text.setOrigin(m_text.getLocalBounds().width / 2.0f, m_text.getLocalBounds().height / 2.0f);
+	
 }
 
 DefeatState::DefeatState(Game* game)
@@ -62,8 +64,10 @@ DefeatState::DefeatState(Game* game)
 {
 	m_text.setFont(game->getFont());
 	m_text.setString("You lost");
+	m_text.setCharacterSize(43);
 	m_text.setPosition(640 / 2.0f, 480 / 2.0f);
 	m_text.setOrigin(m_text.getLocalBounds().width / 2.0f, m_text.getLocalBounds().height / 2.0f);
+	
 
 	m_text2.setFont(game->getFont());
 	m_text2.setString("Press space to exit to menu");
