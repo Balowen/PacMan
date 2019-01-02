@@ -61,7 +61,6 @@ void Game::run()
 void Game::changeGameState(GameState::State next_gameState)
 {
 	m_currentState = m_gameStates[next_gameState];
-
 }
 
 
