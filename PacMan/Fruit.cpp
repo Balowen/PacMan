@@ -8,7 +8,7 @@ Fruit::Fruit(sf::Texture& texture)
 	m_sprite.setOrigin(7.5, 7.5);	//every sprite is 15x15 large
 	setBonusFruit(cherry);	//first, cherry appears :D !
 }
-
+ 
 Fruit::~Fruit()
 {
 }
