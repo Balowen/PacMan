@@ -17,6 +17,9 @@ public:
 	Fruit(sf::Texture& texture); //konstruktor z referencja na teksture (owocu)
 	void setBonusFruit(bonusFruit fruit);
 
+	~Fruit();
+	
+
 	
 
 	//https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Drawable.php
