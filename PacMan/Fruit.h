@@ -15,7 +15,7 @@ public:
 	};
 
 	Fruit(sf::Texture& texture); //konstruktor z referencja na teksture (owocu)
-	void setBonusFruit(Fruit fruit);
+	void setBonusFruit(bonusFruit fruit);
 
 	
 
