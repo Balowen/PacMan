@@ -4,6 +4,7 @@
 
 PacMan::PacMan(sf::Texture& texture)
 :m_sprite(texture)
+,m_isDying(false)
 ,m_isDead(false)
 {
 	m_sprite.setOrigin(7, 7);		// Pacman sprite is 14,14
@@ -33,4 +34,9 @@ void PacMan::die()
 bool PacMan::isDead() const
 {
 	return m_isDead;
+}
+
+bool PacMan::isDying() const
+{
+	return m_isDying;
 }
