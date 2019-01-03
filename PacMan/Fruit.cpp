@@ -5,7 +5,7 @@
 Fruit::Fruit(sf::Texture& texture)
 :m_sprite(texture)
 {
-	m_sprite.setOrigin(7.5, 7.5);	//every sprite is 15x15 large
+	m_sprite.setOrigin(7, 7);	//every sprite is 14x14 large
 	setBonusFruit(cherry);	//first, cherry appears :D !
 }
  
@@ -16,11 +16,11 @@ Fruit::~Fruit()
 void Fruit::setBonusFruit(bonusFruit fruit)
 {
 	if (fruit == cherry)
-		m_sprite.setTextureRect(sf::IntRect(35, 49, 15, 15));
+		m_sprite.setTextureRect(sf::IntRect(36, 49, 14, 14));
 	else if (fruit == strawberry)
-		m_sprite.setTextureRect(sf::IntRect(35 + 16, 49, 15, 15));		//zmierzone w gimpie
+		m_sprite.setTextureRect(sf::IntRect(36 + 16, 49, 14, 14));		//zmierzone w gimpie
 	else if (fruit == peach)
-		m_sprite.setTextureRect(sf::IntRect(35 + 32, 49, 15, 15));
+		m_sprite.setTextureRect(sf::IntRect(36 + 32, 49, 14, 14));
 	//TO DO:
 	// ADD MORE FRUITS
 }
