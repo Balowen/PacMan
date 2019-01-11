@@ -9,6 +9,7 @@ Ghost::Ghost(sf::Texture& texture)
 ,m_pacMan(m_pacMan)
 {
 	m_sprite.setOrigin(7, 7);
+	m_sprite.setScale(2.5, 2.5);
 
 	m_chaseAnimation.addFrame(sf::IntRect(4, 65, 14, 14));
 	m_chaseAnimation.addFrame(sf::IntRect(20, 65, 14, 14));
@@ -16,8 +17,8 @@ Ghost::Ghost(sf::Texture& texture)
 	m_scaredAnimation.addFrame(sf::IntRect(132, 65, 14, 14));
 	m_scaredAnimation.addFrame(sf::IntRect(148, 65, 14, 14));
 
-	m_chaseAnimation.play(sf::milliseconds(25),true);
-	m_scaredAnimation.play(sf::seconds(1), true);
+	m_chaseAnimation.play(sf::seconds(0.25),true);
+	m_scaredAnimation.play(sf::seconds(0.25), true);
 
 }
 
@@ -39,7 +40,7 @@ void Ghost::update(sf::Time elapsedTime)
 		if (m_scaredTime <= sf::Time::Zero)
 		{
 			m_isScared = false;
-			m_chaseAnimation.play(sf::milliseconds(25), true);	//play chase animation
+			m_chaseAnimation.play(sf::seconds(0.25), true);	//play chase animation
 		}
 	}
 	
