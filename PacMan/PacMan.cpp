@@ -44,6 +44,26 @@ void PacMan::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	}
 }
 
+void PacMan::update(sf::Time elapsedTime)
+{
+	if (!m_isDead && !m_isDying)			//if pacman is alive
+	{
+		m_aliveAnimation.update(elapsedTime);
+		m_aliveAnimation.animate(m_sprite);
+	}
+	else
+	{
+		m_dieAnimation.update(elapsedTime);
+		m_dieAnimation.animate(m_sprite);
+
+		if (m_dieAnimation.isPlaying())		//die animation finished, pacman is dead
+		{
+			m_isDying = false;
+			m_isDead = true;
+		}
+	}
+}
+
 void PacMan::die()
 {
 	if (!m_isDying)
