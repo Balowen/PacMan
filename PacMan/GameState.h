@@ -1,5 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "Ghost.h"
+#include "PacMan.h"
 
 //https://stackoverflow.com/questions/15827921/include-in-header-file-vs-forward-declare-and-include-in-cpp
 // forward declaration zamiast  include
@@ -73,7 +75,11 @@ public:
 	void pressStart();
 	void movePacman(sf::Vector2i direction);
 	void update(sf::Time delta);
-	void draw(sf::RenderWindow& window);		
+	void draw(sf::RenderWindow& window);	
+
+private:
+	PacMan m_pacMan;
+	Ghost m_ghost;		//narazie jeden duch
 };
 
 class VictoryState : public GameState

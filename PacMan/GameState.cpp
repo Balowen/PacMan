@@ -45,7 +45,11 @@ GetReadyState::GetReadyState(Game* game)
 
 PlayState::PlayState(Game* game)
 :GameState(game)
+,m_pacMan(game->getTexture())
+,m_ghost(game->getTexture())
 {
+	m_pacMan.move(100, 100);
+	m_ghost.move(300, 300);
 }
 
 VictoryState::VictoryState(Game* game)
@@ -119,6 +123,8 @@ void GetReadyState::draw(sf::RenderWindow & window)
 
 void PlayState::pressStart()
 {// TO DO !!!!!!!!
+	m_pacMan.die();
+	m_ghost.setScared(sf::seconds(4));	//just to test
 }
 
 void PlayState::movePacman(sf::Vector2i direction)
@@ -131,10 +137,14 @@ void PlayState::movePacman(sf::Vector2i direction)
 
 void PlayState::update(sf::Time delta)
 {// TO DO !!!!!!!!
+	m_pacMan.update(delta);
+	m_ghost.update(delta);
 }
 
 void PlayState::draw(sf::RenderWindow & window)
 {// TO DO !!!!!!!!
+	window.draw(m_pacMan);
+	window.draw(m_ghost);
 }
 
 void VictoryState::pressStart()
