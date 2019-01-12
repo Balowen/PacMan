@@ -130,6 +130,7 @@
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Ghost.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Map.cpp" />
     <ClCompile Include="Movable.cpp" />
     <ClCompile Include="PacMan.cpp" />
   </ItemGroup>
@@ -140,6 +141,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="Ghost.h" />
+    <ClInclude Include="Map.h" />
     <ClInclude Include="Movable.h" />
     <ClInclude Include="PacMan.h" />
   </ItemGroup>

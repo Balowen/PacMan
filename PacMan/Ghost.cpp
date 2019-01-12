@@ -19,7 +19,7 @@ Ghost::Ghost(sf::Texture& texture)
 
 	m_chaseAnimation.play(sf::seconds(0.25),true);
 	m_scaredAnimation.play(sf::seconds(0.25), true);
-
+	
 }
 
 Ghost::~Ghost()
