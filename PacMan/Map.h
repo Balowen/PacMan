@@ -8,6 +8,8 @@ public:
 	~Map();
 
 	void loadMap(std::string levelName);
+	sf::Vector2i getPacManPosition() const;
+	std::vector<sf::Vector2i> getGhostPosition() const;
 
 private:
 	enum singleCell
@@ -20,6 +22,9 @@ private:
 	};
 
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+
+	sf::Vector2i pacManPosition;
+	std::vector<sf::Vector2i> ghostsPositions;
 
 	sf::Vector2i m_mapSize;
 	std::vector<singleCell> m_mapData;	//what is a wall, what is a ghost start point etc.

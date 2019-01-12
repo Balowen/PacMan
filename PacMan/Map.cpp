@@ -33,6 +33,16 @@ void Map::loadMap(std::string levelName)
 			else if (singleCell == sf::Color::Green)
 				m_mapData.push_back(BigDot);
 			else if (singleCell == sf::Color::Blue)
+			{
+				pacManPosition = sf::Vector2i(x, y);
+				m_mapData.push_back(Empty);	//pacman starting position
+			}
+			else if (singleCell == sf::Color::Red)
+			{
+				ghostsPositions.push_back(sf::Vector2i(x, y));
+				m_mapData.push_back(Empty);	//ghost starting position
+			}
+			else
 				m_mapData.push_back(Empty);
 		}
 	}
