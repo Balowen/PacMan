@@ -11,6 +11,9 @@ public:
 	sf::Vector2i getPacManPosition() const;
 	std::vector<sf::Vector2i> getGhostPosition() const;
 
+	std::size_t positionToIndex(sf::Vector2i position) const;
+	sf::Vector2i indexToPosition(std::size_t index) const;
+
 private:
 	enum singleCell
 	{

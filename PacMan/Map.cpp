@@ -49,6 +49,31 @@ void Map::loadMap(std::string levelName)
 
 }
 
+sf::Vector2i Map::getPacManPosition() const
+{
+	return pacManPosition;
+}
+
+std::vector<sf::Vector2i> Map::getGhostPosition() const
+{
+	return ghostsPositions;
+}
+
+std::size_t Map::positionToIndex(sf::Vector2i position) const
+{
+	return position.y * m_mapSize.x + position.x;
+}
+
+sf::Vector2i Map::indexToPosition(std::size_t index) const
+{
+	sf::Vector2i position;
+
+	position.x = index % m_mapSize.x;	//mam rozrysowane na kartce
+	position.y = index / m_mapSize.x;
+
+	return position;
+}
+
 void Map::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 }
