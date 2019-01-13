@@ -47,6 +47,13 @@ void Map::loadMap(std::string levelName)
 		}
 	}
 
+	m_texture.create(32 * m_mapSize.x, 32 * m_mapSize.y);	//single cell is 32x32 large
+	m_texture.clear(sf::Color::Black);	
+
+	//drawing here
+
+	m_texture.display();
+
 }
 
 sf::Vector2i Map::getPacManPosition() const
@@ -76,4 +83,5 @@ sf::Vector2i Map::indexToPosition(std::size_t index) const
 
 void Map::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
+	target.draw(sf::Sprite(m_texture.getTexture()), states);
 }
