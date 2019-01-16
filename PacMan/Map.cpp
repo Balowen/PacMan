@@ -1,5 +1,5 @@
 #include "Map.h"
-
+#include "Capsules.h"
 
 Map::Map()
 :m_mapSize(0,0)
@@ -65,10 +65,12 @@ void Map::loadMap(std::string levelName)
 			sf::RectangleShape wall;
 			wall.setSize(sf::Vector2f(32, 32));
 			wall.setFillColor(sf::Color::Cyan);
-			wall.setPosition(32 * position.x,position.y);
+			wall.setPosition(32 * position.x,32 * position.y);
 			m_texture.draw(wall);		//drawing walls of a level on a black texture
 		}
 	}
+
+
 }
 
 sf::Vector2i Map::getPacManPosition() const
@@ -99,4 +101,24 @@ sf::Vector2i Map::indexToPosition(std::size_t index) const
 void Map::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	target.draw(sf::Sprite(m_texture.getTexture()), states);
+
+	//-------------- CREATING DOTS (capsules.cpp)
+	static sf::CircleShape dot = createDot();
+	static sf::CircleShape bigDot = createBigDot();
+
+	for (unsigned int i = 0; i < m_mapData.size(); i++)
+	{
+		sf::Vector2i position = indexToPosition(i);	//changing index to position for whole mapData
+
+		if (m_mapData[i] == Dot)
+		{
+			dot.setPosition(32 * position.x + 16, 32 * position.y + 16);
+			target.draw(dot, states);		//drawing walls of a level on a black texture
+		}
+		else if (m_mapData[i] == BigDot)
+		{
+			bigDot.setPosition(32 * position.x + 16, 32 * position.y + 16);
+			target.draw(bigDot, states);
+		}
+	}
 }

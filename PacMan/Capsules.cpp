@@ -1,6 +1,6 @@
 #include "Capsules.h"
 
-sf::CircleShape dot()
+sf::CircleShape createDot()
 {
 	sf::CircleShape dot;
 	dot.setRadius(3);
@@ -10,7 +10,7 @@ sf::CircleShape dot()
 	return dot;
 }
 
-sf::CircleShape bigDot()
+sf::CircleShape createBigDot()
 {
 	sf::CircleShape bigDot;
 	bigDot.setRadius(6);
