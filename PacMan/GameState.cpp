@@ -45,12 +45,16 @@ GetReadyState::GetReadyState(Game* game)
 
 PlayState::PlayState(Game* game)
 :GameState(game)
-,m_pacMan(game->getTexture())
-,m_ghost(game->getTexture())
+//,m_pacMan(game->getTexture())
+//,m_ghost(game->getTexture())
+,m_pacMan(nullptr)
 {
-	m_pacMan.move(100, 100);
-	m_ghost.move(300, 300);
+	//m_pacMan.move(100, 100);
+	//m_ghost.move(300, 300);
 	m_map.loadMap("level");
+
+	m_pacMan = new PacMan(game->getTexture());
+	m_pacMan->accessMap(&m_map);
 }
 
 VictoryState::VictoryState(Game* game)

@@ -98,6 +98,23 @@ sf::Vector2i Map::indexToPosition(std::size_t index) const
 	return position;
 }
 
+sf::Vector2i Map::transform_pixelToCell(sf::Vector2f pixel) const
+{
+	sf::Vector2i cell;
+	cell.x = std::floor(pixel.x / 32.f);
+	cell.y = std::floor(pixel.y / 32.f);
+	
+	return cell;
+}
+
+sf::Vector2f Map::transform_cellToPixel(sf::Vector2i cell) const
+{
+	sf::Vector2f pixel;
+	pixel.x = cell.x * 32 + 16;		//dodajemy 16 zeby pozycja byla w srodku komórki 32x32
+	pixel.y = cell.y * 32 + 16;
+	return pixel;
+}
+
 void Map::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	target.draw(sf::Sprite(m_texture.getTexture()), states);

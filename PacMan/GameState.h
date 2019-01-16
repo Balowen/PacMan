@@ -79,9 +79,9 @@ public:
 	void draw(sf::RenderWindow& window);	
 
 private:
-	PacMan m_pacMan;
-	Ghost m_ghost;		//narazie jeden duch
-
+	PacMan* m_pacMan;
+	std::vector<Ghost*> m_ghosts;	// tablica z wieloma duchami
+	
 	Map m_map;
 };
 
