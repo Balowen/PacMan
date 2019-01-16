@@ -1,6 +1,5 @@
 #include "GameState.h"
 #include "Game.h"
-#include "Map.h"
 #include <iostream>
 
 
@@ -134,6 +133,10 @@ void GetReadyState::pressStart()
 
 void GetReadyState::movePacman(sf::Vector2i direction)
 {// TO DO !!!!!!!!
+	if (direction.x == -1)
+		getGame()->changeGameState(GameState::Victory);	//just to check if it works
+	else if (direction.x == 1)
+		getGame()->changeGameState(GameState::Defeat);
 }
 
 void GetReadyState::update(sf::Time delta)
@@ -153,10 +156,11 @@ void PlayState::pressStart()
 
 void PlayState::movePacman(sf::Vector2i direction)
 {
-	if (direction.x == -1)
-		getGame()->changeGameState(GameState::Victory);	//just to check if it works
-	else if (direction.x == 1)
-		getGame()->changeGameState(GameState::Defeat);
+	//if (direction.x == -1)
+	//	getGame()->changeGameState(GameState::Victory);	//just to check if it works
+	//else if (direction.x == 1)
+	//	getGame()->changeGameState(GameState::Defeat);
+	m_pacMan->changeDirection(direction);
 }
 
 void PlayState::update(sf::Time delta)

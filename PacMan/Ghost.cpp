@@ -18,7 +18,7 @@ Ghost::Ghost(sf::Texture& texture)
 	//m_scaredAnimation.addFrame(sf::IntRect(148, 65, 14, 14));
 
 	m_chaseAnimation.play(sf::seconds(0.25),true);
-	m_scaredAnimation.play(sf::seconds(0.25), true);
+	m_scaredAnimation.play(sf::seconds(1), true);
 	
 }
 

@@ -73,6 +73,11 @@ void Map::loadMap(std::string levelName)
 
 }
 
+sf::Vector2i Map::getSize() const
+{
+	return m_mapSize;
+}
+
 sf::Vector2i Map::getPacManPosition() const
 {
 	return pacManPosition;
@@ -120,6 +125,7 @@ bool Map::isWall(sf::Vector2i position) const
 	//------sprawdzenie czy pozycja miesci sie w granicach labiryntu
 	if (position.x < 0 || position.y < 0 || position.x >= m_mapSize.x || position.y >= m_mapSize.y)
 		return false;
+
 	return m_mapData[positionToIndex(position)] == Wall;	//sprawdza czy dana pozycja jest scian¹
 }
 

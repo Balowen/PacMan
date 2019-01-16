@@ -19,7 +19,7 @@ public:
 	sf::Vector2f transform_cellToPixel(sf::Vector2i cell) const;
 
 	bool isWall(sf::Vector2i position) const;	// zwraca czy dana pozycja jest sciana
-
+	sf::Vector2i getSize() const;
 private:
 	enum singleCell
 	{

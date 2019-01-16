@@ -3,7 +3,7 @@
 
 
 Movable::Movable()
-	:m_velocity(2.f)		//how many pixel per second, check later
+	:m_velocity(25.f)		//how many pixel per second, check later
 	,m_currentDirection(1,0)
 	,m_nextDirection(0,0)
 	,m_map(nullptr)
@@ -34,7 +34,7 @@ void Movable::update(sf::Time delta)
 {
 	sf::Vector2f pixelPos = getPosition();
 
-	float pixelTraveled = getVelocity() * delta.asSeconds();	//velocity is [pixels/seconds]
+	float pixelTraveled = getVelocity() * delta.asSeconds();	//how many pixels traveled at one frame
 
 	sf::Vector2f nextPixelPos = pixelPos + sf::Vector2f(m_currentDirection) * pixelTraveled;
 	setPosition(nextPixelPos);
@@ -57,11 +57,36 @@ void Movable::update(sf::Time delta)
 		}
 	}
 	// ----------Changing direction after colliding 
-	if (!m_map->isWall(cellPos + m_currentDirection) && m_currentDirection != m_nextDirection)
+	if (!m_map->isWall(cellPos + m_nextDirection) && m_currentDirection != m_nextDirection)
 	{
-		if((!m_currentDirection.y && (offset.x > -1 && offset.x < 1)) ||
-			(!m_currentDirection.x && (offset.y >-1 && offset.y <1)))	//jesli idzie na bok, to offset w osi y ma byc bliski zeru
-		m_currentDirection = m_nextDirection;
+		if ((!m_currentDirection.y && (offset.x > -2 && offset.x < 2)) ||
+			(!m_currentDirection.x && (offset.y > -2 && offset.y < 2)))	//jesli idzie na bok, to offset w osi y ma byc bliski zeru
+		{
+			setPosition(m_map->transform_cellToPixel(cellPos));		//reseting character position on current cell
+			m_currentDirection = m_nextDirection;
+
+			if (m_currentDirection == sf::Vector2i(1, 0))
+			{
+				setRotation(0);
+				setScale(-1, 1);	//flipping the sprite
+			}
+			else if (m_currentDirection == sf::Vector2i(0, 1))
+			{
+				setRotation(90);
+				setScale(-1, 1);
+			}
+			else if (m_currentDirection == sf::Vector2i(-1, 0))
+			{
+				setRotation(0);
+				setScale(1, 1);
+			}
+			else if (m_currentDirection == sf::Vector2i(1, 0))
+			{
+				setRotation(90);
+				setScale(1, 1);
+			}
+
+		}
 	}
 }
 
