@@ -78,7 +78,7 @@ sf::Vector2i Map::getPacManPosition() const
 	return pacManPosition;
 }
 
-std::vector<sf::Vector2i> Map::getGhostPosition() const
+std::vector<sf::Vector2i> Map::getGhostsPositions() const
 {
 	return ghostsPositions;
 }

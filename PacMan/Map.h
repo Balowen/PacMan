@@ -9,7 +9,7 @@ public:
 
 	void loadMap(std::string levelName);
 	sf::Vector2i getPacManPosition() const;
-	std::vector<sf::Vector2i> getGhostPosition() const;
+	std::vector<sf::Vector2i> getGhostsPositions() const;
 
 
 	std::size_t positionToIndex(sf::Vector2i position) const;

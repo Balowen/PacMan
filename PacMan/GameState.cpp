@@ -1,5 +1,6 @@
 #include "GameState.h"
 #include "Game.h"
+#include "Map.h"
 #include <iostream>
 
 
@@ -55,6 +56,13 @@ PlayState::PlayState(Game* game)
 
 	m_pacMan = new PacMan(game->getTexture());
 	m_pacMan->accessMap(&m_map);
+	m_pacMan->setPosition(m_map.transform_cellToPixel(m_map.getPacManPosition()));	//setting pacman initial position
+
+	for (auto ghostPosition : m_map.getGhostsPositions())
+	{
+		Ghost* ghost = new Ghost(game->getTexture());
+		ghost->accessMap(&m_map);
+	}
 }
 
 VictoryState::VictoryState(Game* game)
