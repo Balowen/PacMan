@@ -56,10 +56,13 @@ void Movable::update(sf::Time delta)
 			setPosition(m_map->transform_cellToPixel(cellPos));	//zatrzyma w miejscu
 		}
 	}
-
-
-	//m_currentDirection = m_nextDirection;
-
+	// ----------Changing direction after colliding 
+	if (!m_map->isWall(cellPos + m_currentDirection) && m_currentDirection != m_nextDirection)
+	{
+		if((!m_currentDirection.y && (offset.x > -1 && offset.x < 1)) ||
+			(!m_currentDirection.x && (offset.y >-1 && offset.y <1)))	//jesli idzie na bok, to offset w osi y ma byc bliski zeru
+		m_currentDirection = m_nextDirection;
+	}
 }
 
 void Movable::changeDirection(sf::Vector2i direction)
