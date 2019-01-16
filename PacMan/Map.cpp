@@ -115,6 +115,14 @@ sf::Vector2f Map::transform_cellToPixel(sf::Vector2i cell) const
 	return pixel;
 }
 
+bool Map::isWall(sf::Vector2i position) const
+{
+	//------sprawdzenie czy pozycja miesci sie w granicach labiryntu
+	if (position.x < 0 || position.y < 0 || position.x >= m_mapSize.x || position.y >= m_mapSize.y)
+		return false;
+	return m_mapData[positionToIndex(position)] == Wall;	//sprawdza czy dana pozycja jest scian¹
+}
+
 void Map::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	target.draw(sf::Sprite(m_texture.getTexture()), states);
