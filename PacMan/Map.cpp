@@ -48,12 +48,27 @@ void Map::loadMap(std::string levelName)
 	}
 
 	m_texture.create(32 * m_mapSize.x, 32 * m_mapSize.y);	//single cell is 32x32 large
-	m_texture.clear(sf::Color::Black);	
+	m_texture.clear(sf::Color::Black);		//background of the level
 
 	//drawing here
 
 	m_texture.display();
 
+	//---------------- RENDERING WALLS -----------------
+
+	for (unsigned int i = 0; i < m_mapData.size(); i++)
+	{
+		sf::Vector2i position = indexToPosition(i);	//changing index to position for whole mapData
+
+		if (m_mapData[i] == Wall)
+		{
+			sf::RectangleShape wall;
+			wall.setSize(sf::Vector2f(32, 32));
+			wall.setFillColor(sf::Color::Cyan);
+			wall.setPosition(32 * position.x,position.y);
+			m_texture.draw(wall);		//drawing walls of a level on a black texture
+		}
+	}
 }
 
 sf::Vector2i Map::getPacManPosition() const
