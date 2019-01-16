@@ -62,7 +62,18 @@ PlayState::PlayState(Game* game)
 	{
 		Ghost* ghost = new Ghost(game->getTexture());
 		ghost->accessMap(&m_map);
+		ghost->setPosition(m_map.transform_cellToPixel(ghostPosition));
+
+		m_ghosts.push_back(ghost);
 	}
+}
+
+PlayState::~PlayState()
+{
+	delete m_pacMan;
+
+	for (Ghost* ghost : m_ghosts)
+		delete ghost;
 }
 
 VictoryState::VictoryState(Game* game)
@@ -136,8 +147,8 @@ void GetReadyState::draw(sf::RenderWindow & window)
 
 void PlayState::pressStart()
 {// TO DO !!!!!!!!
-	m_pacMan.die();
-	m_ghost.setScared(sf::seconds(4));	//just to test
+	//m_pacMan.die();
+	//m_ghost.setScared(sf::seconds(4));	//just to test
 }
 
 void PlayState::movePacman(sf::Vector2i direction)
@@ -150,15 +161,19 @@ void PlayState::movePacman(sf::Vector2i direction)
 
 void PlayState::update(sf::Time delta)
 {// TO DO !!!!!!!!
-	m_pacMan.update(delta);
-	m_ghost.update(delta);
+	m_pacMan->update(delta);
+
+	for (Ghost* ghost : m_ghosts)
+		ghost->update(delta);
 }
 
 void PlayState::draw(sf::RenderWindow & window)
 {// TO DO !!!!!!!!
 	window.draw(m_map);
-	window.draw(m_pacMan);
-	window.draw(m_ghost);	
+	window.draw(*m_pacMan);
+	
+	for (Ghost* ghost : m_ghosts)
+		window.draw(*ghost);
 }
 
 void VictoryState::pressStart()

@@ -8,12 +8,12 @@ PacMan::PacMan(sf::Texture& texture)
 ,m_isDead(false)
 {
 	m_sprite.setOrigin(7, 7);		// Pacman sprite is 14 x 14
-	m_sprite.setScale(2.5, 2.5);
+	m_sprite.setScale(2.2, 2.2);
 
-	m_aliveAnimation.addFrame(sf::IntRect(3, 1, 14, 14));
+	//m_aliveAnimation.addFrame(sf::IntRect(3, 1, 14, 14));
 	m_aliveAnimation.addFrame(sf::IntRect(19, 1, 14, 14));
 
-	m_dieAnimation.addFrame(sf::IntRect(36, 1, 14, 14));
+	/*m_dieAnimation.addFrame(sf::IntRect(36, 1, 14, 14));
 	m_dieAnimation.addFrame(sf::IntRect(36 + 16, 1, 14, 14));
 	m_dieAnimation.addFrame(sf::IntRect(36 + 31, 1, 15, 15));
 	m_dieAnimation.addFrame(sf::IntRect(36 + 31, 1, 15, 15));
@@ -25,7 +25,7 @@ PacMan::PacMan(sf::Texture& texture)
 	m_dieAnimation.addFrame(sf::IntRect(36 + 127, 1, 15, 15));
 	m_dieAnimation.addFrame(sf::IntRect(36 + 143, 1, 15, 15));
 	m_dieAnimation.addFrame(sf::IntRect(36 + 159, 1, 15, 15));
-	m_dieAnimation.addFrame(sf::IntRect(36 + 175, 1, 15, 15));
+	m_dieAnimation.addFrame(sf::IntRect(36 + 175, 1, 15, 15));*/
 
 	m_aliveAnimation.play(sf::milliseconds(250), true);	//0.25 per frame and loop animation
 
@@ -55,7 +55,7 @@ void PacMan::update(sf::Time elapsedTime)
 	}
 	else
 	{
-		m_dieAnimation.update(elapsedTime);
+		//m_dieAnimation.update(elapsedTime);
 		m_dieAnimation.animate(m_sprite);
 
 		if (!m_dieAnimation.isPlaying())		//die animation finished, pacman is dead

@@ -72,6 +72,7 @@ class PlayState : public GameState
 {
 public:
 	PlayState(Game* game);
+	~PlayState();
 
 	void pressStart();
 	void movePacman(sf::Vector2i direction);

@@ -6,16 +6,16 @@ Ghost::Ghost(sf::Texture& texture)
 :m_sprite(texture)
 ,m_isScared(false)
 ,m_scaredTime(sf::Time::Zero)
-,m_pacMan(m_pacMan)
+//,m_pacMan(m_pacMan)
 {
 	m_sprite.setOrigin(7, 7);
 	m_sprite.setScale(2.5, 2.5);
 
 	m_chaseAnimation.addFrame(sf::IntRect(4, 65, 14, 14));
-	m_chaseAnimation.addFrame(sf::IntRect(20, 65, 14, 14));
+	//m_chaseAnimation.addFrame(sf::IntRect(20, 65, 14, 14));
 
 	m_scaredAnimation.addFrame(sf::IntRect(132, 65, 14, 14));
-	m_scaredAnimation.addFrame(sf::IntRect(148, 65, 14, 14));
+	//m_scaredAnimation.addFrame(sf::IntRect(148, 65, 14, 14));
 
 	m_chaseAnimation.play(sf::seconds(0.25),true);
 	m_scaredAnimation.play(sf::seconds(0.25), true);
