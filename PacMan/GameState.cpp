@@ -50,6 +50,7 @@ PlayState::PlayState(Game* game)
 {
 	m_pacMan.move(100, 100);
 	m_ghost.move(300, 300);
+	m_map.loadMap("level");
 }
 
 VictoryState::VictoryState(Game* game)
@@ -143,8 +144,9 @@ void PlayState::update(sf::Time delta)
 
 void PlayState::draw(sf::RenderWindow & window)
 {// TO DO !!!!!!!!
+	window.draw(m_map);
 	window.draw(m_pacMan);
-	window.draw(m_ghost);
+	window.draw(m_ghost);	
 }
 
 void VictoryState::pressStart()

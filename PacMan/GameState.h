@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "Ghost.h"
 #include "PacMan.h"
+#include "Map.h"
 
 //https://stackoverflow.com/questions/15827921/include-in-header-file-vs-forward-declare-and-include-in-cpp
 // forward declaration zamiast  include
@@ -80,6 +81,8 @@ public:
 private:
 	PacMan m_pacMan;
 	Ghost m_ghost;		//narazie jeden duch
+
+	Map m_map;
 };
 
 class VictoryState : public GameState
