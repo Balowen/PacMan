@@ -28,7 +28,7 @@ PacMan::PacMan(sf::Texture& texture)
 	m_dieAnimation.addFrame(sf::IntRect(36 + 159, 1, 15, 15));
 	m_dieAnimation.addFrame(sf::IntRect(36 + 175, 1, 15, 15));*/
 
-	m_aliveAnimation.play(sf::milliseconds(400), true);	//0.25 per frame and loop animation
+	m_aliveAnimation.play(sf::seconds(0.25), true);	//0.25 per frame and loop animation
 
 }
 
