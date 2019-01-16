@@ -13,6 +13,8 @@ PacMan::PacMan(sf::Texture& texture)
 	//m_aliveAnimation.addFrame(sf::IntRect(3, 1, 14, 14));
 	m_aliveAnimation.addFrame(sf::IntRect(19, 1, 14, 14));
 
+	////m_aliveAnimation.addFrame(sf::IntRect(0, 72, 40, 40));
+
 	/*m_dieAnimation.addFrame(sf::IntRect(36, 1, 14, 14));
 	m_dieAnimation.addFrame(sf::IntRect(36 + 16, 1, 14, 14));
 	m_dieAnimation.addFrame(sf::IntRect(36 + 31, 1, 15, 15));
@@ -64,6 +66,7 @@ void PacMan::update(sf::Time elapsedTime)
 			m_isDead = true;
 		}
 	}
+	Movable::update(elapsedTime);
 }
 
 void PacMan::die()

@@ -68,22 +68,22 @@ void Movable::update(sf::Time delta)
 			if (m_currentDirection == sf::Vector2i(1, 0))
 			{
 				setRotation(0);
-				setScale(-1, 1);	//flipping the sprite
+				setScale(1, 1);	//flipping the sprite
 			}
 			else if (m_currentDirection == sf::Vector2i(0, 1))
 			{
 				setRotation(90);
-				setScale(-1, 1);
+				setScale(1, 1);
 			}
 			else if (m_currentDirection == sf::Vector2i(-1, 0))
 			{
 				setRotation(0);
-				setScale(1, 1);
+				setScale(-1, 1);
 			}
-			else if (m_currentDirection == sf::Vector2i(1, 0))
+			else if (m_currentDirection == sf::Vector2i(0, -1))
 			{
 				setRotation(90);
-				setScale(1, 1);
+				setScale(-1, 1);
 			}
 
 		}
