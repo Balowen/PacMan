@@ -3,7 +3,7 @@
 
 
 Movable::Movable()
-	:m_velocity(25.f)		//how many pixel per second, check later
+	:m_velocity(50.f)		//how many pixel per second, check later
 	,m_currentDirection(1,0)
 	,m_nextDirection(0,0)
 	,m_map(nullptr)
