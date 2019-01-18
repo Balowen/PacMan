@@ -88,6 +88,37 @@ void Movable::update(sf::Time delta)
 
 		}
 	}
+
+	//MAKING ARRAY OF POSSiBLE DIRECTIONS AT GIVEN INTERSECTION
+
+	static sf::Vector2i directions[4] = { 
+		sf::Vector2i(1,0), sf::Vector2i(-1,0),
+		sf::Vector2i(0,1), sf::Vector2i(0,-1)
+	};
+
+	if (cellPos != m_lastIntersection)
+	{
+		if ((!m_currentDirection.y && (offset.x > -2 && offset.x < 2)) ||
+			(!m_currentDirection.x && (offset.y > -2 && offset.y < 2)))
+		{
+			std::array<bool, 4> possibleDirections;
+
+			int i = 0;
+			for (auto direction : directions)			//checking if there is a wall in this direction
+			{
+				possibleDirections[i] = m_map->isWall(cellPos + direction);
+				i++;
+			}
+
+			if (m_possibleDirections != possibleDirections)
+			{
+				m_lastIntersection = cellPos;
+				m_possibleDirections = possibleDirections;
+
+				updateDirection();
+			}
+		}
+	}
 }
 
 void Movable::changeDirection(sf::Vector2i direction)

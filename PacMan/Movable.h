@@ -23,5 +23,11 @@ private:
 
 	sf::Vector2i m_currentDirection;
 	sf::Vector2i m_nextDirection;
+
+	sf::Vector2i m_lastIntersection;	// cell position of the last intersection (road + )
+	std::array<bool, 4> m_possibleDirections;
+
+protected:
+	virtual void updateDirection() {};
 };
 

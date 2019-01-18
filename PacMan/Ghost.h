@@ -7,8 +7,8 @@
 class Ghost : public Movable
 {
 public:
-	Ghost(sf::Texture& texture);
-	~Ghost();
+	Ghost(sf::Texture& texture, PacMan* pacMan);	//wskaznik zeby wiedziec gdzie 
+	~Ghost();									// jest pacman
 
 	enum State
 	{
@@ -30,5 +30,8 @@ private:
 
 	Animation m_scaredAnimation;
 	Animation m_chaseAnimation;
+
+protected:
+	void updateDirection();
 };
 

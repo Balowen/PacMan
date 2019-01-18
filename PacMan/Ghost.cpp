@@ -2,7 +2,7 @@
 
 
 
-Ghost::Ghost(sf::Texture& texture)
+Ghost::Ghost(sf::Texture& texture,PacMan* pacMan)
 :m_sprite(texture)
 ,m_isScared(false)
 ,m_scaredTime(sf::Time::Zero)
@@ -65,4 +65,9 @@ void Ghost::setScared(sf::Time scaredTime)
 bool Ghost::isScared() const
 {
 	return m_isScared;
+}
+
+void Ghost::updateDirection()
+{
+
 }

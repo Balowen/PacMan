@@ -59,7 +59,7 @@ PlayState::PlayState(Game* game)
 
 	for (auto ghostPosition : m_map.getGhostsPositions())
 	{
-		Ghost* ghost = new Ghost(game->getTexture());
+		Ghost* ghost = new Ghost(game->getTexture(),m_pacMan);
 		ghost->accessMap(&m_map);
 		ghost->setPosition(m_map.transform_cellToPixel(ghostPosition));
 
