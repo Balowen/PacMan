@@ -12,7 +12,7 @@ public:
 	float getVelocity() const;
 	virtual void update(sf::Time delta);
 
-	void changeDirection(sf::Vector2i direction);
+	void setDirection(sf::Vector2i direction);
 	sf::Vector2i getDirection() const;
 
 	void accessMap(Map* map);
@@ -29,5 +29,6 @@ private:
 
 protected:
 	virtual void updateDirection() {};
+	
 };
 

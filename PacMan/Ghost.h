@@ -33,5 +33,6 @@ private:
 
 protected:
 	void updateDirection();
+	float normalizeAngle(float x);
 };
 

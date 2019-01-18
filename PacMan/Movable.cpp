@@ -121,7 +121,7 @@ void Movable::update(sf::Time delta)
 	}
 }
 
-void Movable::changeDirection(sf::Vector2i direction)
+void Movable::setDirection(sf::Vector2i direction)
 {
 	m_nextDirection = direction;
 }

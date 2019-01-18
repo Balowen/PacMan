@@ -69,5 +69,36 @@ bool Ghost::isScared() const
 
 void Ghost::updateDirection()
 {
+	static sf::Vector2i directions[4] = {
+		sf::Vector2i(1,0), sf::Vector2i(-1,0),
+		sf::Vector2i(0,1), sf::Vector2i(0,-1)
+	};
+	//http://cpp0x.pl/kursy/Kurs-C++/Poziom-5/Kontenery-asocjacyjne-std-set-i-std-map/589
+	std::map<float, sf::Vector2i> directionHierarchy;	//zapisuje roznice katow do pacmana i odpowiadajcy kierunek, map<> sam posortuje
+
+	float angleToPac;
+
+	sf::Vector2f distanceToPac = m_pacMan->getPosition() - this->getPosition();
+	angleToPac = std::atan2(distanceToPac.x, distanceToPac.y) *(180/3.14); //atan2 zwraca kat w radianach
+
+	for (auto direction : directions)
+	{
+		float angle_toDirection = std::atan2(direction.x, direction.y) *(180/3.14);
+
+		float difference = normalizeAngle(angle_toDirection - angleToPac);
+
+		directionHierarchy[difference] = direction;		//difference(k¹t) to klucz wdg ktorego posortuje
+	}
+	setDirection(directionHierarchy.begin()->second);	//begin() zwraca iterator, ->first to klucz (tutaj k¹t),->second to direction
+
 
 }
+
+float Ghost::normalizeAngle(float x)
+{
+	x = fmod(x + 180, 360);
+	if (x < 0)
+		x += 360;
+	return x - 180;
+}
+

@@ -160,7 +160,7 @@ void PlayState::movePacman(sf::Vector2i direction)
 	//	getGame()->changeGameState(GameState::Victory);	//just to check if it works
 	//else if (direction.x == 1)
 	//	getGame()->changeGameState(GameState::Defeat);
-	m_pacMan->changeDirection(direction);
+	m_pacMan->setDirection(direction);
 }
 
 void PlayState::update(sf::Time delta)
