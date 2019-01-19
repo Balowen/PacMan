@@ -1,5 +1,5 @@
 #include "Ghost.h"
-
+#include "GameState.h"
 
 
 Ghost::Ghost(sf::Texture& texture,PacMan* pacMan)
@@ -87,25 +87,35 @@ void Ghost::updateDirection()
 
 	for (auto direction : directions)
 	{
-		float directionAngle = std::atan2(direction.x, direction.y)*(180 / 3.14);
+		float angle_toDirection = std::atan2(direction.x, direction.y)*(180 / 3.14);
 
-		float difference = 180 - std::abs(std::abs(directionAngle - angleToPac) - 180);
+		//float difference = 180 - std::abs(std::abs(angle_toDirection - angleToPac) - 180);
+		float difference = normalizeAngle(angle_toDirection - angleToPac);
 
 		directionHierarchy[difference] = direction;		//difference(k¹t) to klucz wdg ktorego posortuje
 													//best directions are first in map<>
 	}
-	setDirection(directionHierarchy.begin()->second);	//begin() zwraca iterator, ->first to klucz (tutaj kat),->second to direction
+	
+		setDirection(directionHierarchy.begin()->second);	//begin() zwraca iterator, ->first to klucz (tutaj kat),->second to direction
 
-	//keep going with best possible direction
+		//keep going with best possible direction
+
+		auto it = directionHierarchy.begin();
+
+		do
+		{
+			
+				setDirection(it->second);
+				it++;
+		
+		} while (!canMove());
 	
-	auto it = directionHierarchy.begin();
-	
-	do
-	{
-		setDirection(it->second);
-		it++;
-	}
-	while (!canMove());
+}
+
+float Ghost::normalizeAngle(float x)
+{
+	x = 180 - std::abs(std::abs(x)-180);
+	return x;
 }
 
 

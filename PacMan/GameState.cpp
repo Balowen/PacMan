@@ -45,7 +45,7 @@ GetReadyState::GetReadyState(Game* game)
 
 PlayState::PlayState(Game* game)
 :GameState(game)
-//,m_pacMan(game->getTexture())
+//m_pacMan(game->getTexture())
 //,m_ghost(game->getTexture())
 ,m_pacMan(nullptr)
 {
@@ -166,9 +166,10 @@ void PlayState::movePacman(sf::Vector2i direction)
 void PlayState::update(sf::Time delta)
 {// TO DO !!!!!!!!
 	m_pacMan->update(delta);
-
 	for (Ghost* ghost : m_ghosts)
+	{
 		ghost->update(delta);
+	}
 }
 
 void PlayState::draw(sf::RenderWindow & window)

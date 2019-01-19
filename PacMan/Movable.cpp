@@ -118,6 +118,7 @@ void Movable::update(sf::Time delta)
 				m_lastIntersection = cellPos;
 				m_possibleDirections = possibleDirections;
 
+			
 				updateDirection();
 			}
 		}

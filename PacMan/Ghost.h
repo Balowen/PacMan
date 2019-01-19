@@ -19,6 +19,8 @@ public:
 	void setScared(sf::Time scaredTime);
 	bool isScared() const;
 
+	float normalizeAngle(float x);
+
 	void update(sf::Time elapsedTime);
 
 protected:
@@ -29,6 +31,7 @@ private:
 	bool m_isScared;
 	sf::Time m_scaredTime;	//how long a ghost stay scared
 	PacMan* m_pacMan;	//przyda sie do kolizji
+
 
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
