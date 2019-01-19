@@ -20,6 +20,10 @@ public:
 	bool isScared() const;
 
 	void update(sf::Time elapsedTime);
+
+protected:
+	void updateDirection();
+
 private:
 	sf::Sprite m_sprite;
 	bool m_isScared;
@@ -31,8 +35,7 @@ private:
 	Animation m_scaredAnimation;
 	Animation m_chaseAnimation;
 
-protected:
-	void updateDirection();
-	float normalizeAngle(float x);
+
+
 };
 

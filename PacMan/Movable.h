@@ -1,6 +1,9 @@
 #pragma once
+
 #include <SFML/Graphics.hpp>
 #include "Map.h"
+#include <array>
+
 
 class Movable : public sf::Drawable, public sf::Transformable
 {
@@ -17,6 +20,11 @@ public:
 
 	void accessMap(Map* map);
 
+	bool canMove() const;	//can a ghost move in this direction
+
+protected:
+	virtual void updateDirection() {};
+
 private:
 	Map* m_map;
 	float m_velocity;		
@@ -27,8 +35,7 @@ private:
 	sf::Vector2i m_lastIntersection;	// cell position of the last intersection (road + )
 	std::array<bool, 4> m_possibleDirections;
 
-protected:
-	virtual void updateDirection() {};
+
 	
 };
 

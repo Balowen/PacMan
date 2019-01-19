@@ -6,7 +6,7 @@ Ghost::Ghost(sf::Texture& texture,PacMan* pacMan)
 :m_sprite(texture)
 ,m_isScared(false)
 ,m_scaredTime(sf::Time::Zero)
-//,m_pacMan(m_pacMan)
+,m_pacMan(m_pacMan)
 {
 	m_sprite.setOrigin(7, 7);
 	m_sprite.setScale(2.5, 2.5);
@@ -54,6 +54,7 @@ void Ghost::update(sf::Time elapsedTime)
 		m_scaredAnimation.update(elapsedTime);
 		m_scaredAnimation.animate(m_sprite);
 	}
+	Movable::update(elapsedTime);
 }
 
 void Ghost::setScared(sf::Time scaredTime)
@@ -70,35 +71,42 @@ bool Ghost::isScared() const
 void Ghost::updateDirection()
 {
 	static sf::Vector2i directions[4] = {
-		sf::Vector2i(1,0), sf::Vector2i(-1,0),
-		sf::Vector2i(0,1), sf::Vector2i(0,-1)
+		sf::Vector2i(1,0),
+		sf::Vector2i(-1,0),
+		sf::Vector2i(0,1),
+		sf::Vector2i(0,-1)
 	};
-	//http://cpp0x.pl/kursy/Kurs-C++/Poziom-5/Kontenery-asocjacyjne-std-set-i-std-map/589
+	//http ://cpp0x.pl/kursy/Kurs-C++/Poziom-5/Kontenery-asocjacyjne-std-set-i-std-map/589
 	std::map<float, sf::Vector2i> directionHierarchy;	//zapisuje roznice katow do pacmana i odpowiadajcy kierunek, map<> sam posortuje
 
 	float angleToPac;
 
-	sf::Vector2f distanceToPac = m_pacMan->getPosition() - this->getPosition();
+	sf::Vector2f distanceToPac = m_pacMan->getPosition() - getPosition();
+
 	angleToPac = std::atan2(distanceToPac.x, distanceToPac.y) *(180/3.14); //atan2 zwraca kat w radianach
 
 	for (auto direction : directions)
 	{
-		float angle_toDirection = std::atan2(direction.x, direction.y) *(180/3.14);
+		float angle_toDirection = std::atan2(direction.x, direction.y)*(180 / 3.14);
 
-		float difference = normalizeAngle(angle_toDirection - angleToPac);
+		float difference = 180 - std::abs(std::abs(angle_toDirection - angleToPac) - 180);
 
 		directionHierarchy[difference] = direction;		//difference(k¹t) to klucz wdg ktorego posortuje
+													//best directions are first in map<>
 	}
-	setDirection(directionHierarchy.begin()->second);	//begin() zwraca iterator, ->first to klucz (tutaj k¹t),->second to direction
+	setDirection(directionHierarchy.begin()->second);	//begin() zwraca iterator, ->first to klucz (tutaj kat),->second to direction
 
-
+	//keep going with best possible direction
+	
+	auto it = directionHierarchy.begin();
+	
+	do
+	{
+		setDirection(it->second);
+		it++;
+	}
+	while (!canMove());
 }
 
-float Ghost::normalizeAngle(float x)
-{
-	x = fmod(x + 180, 360);
-	if (x < 0)
-		x += 360;
-	return x - 180;
-}
+
 

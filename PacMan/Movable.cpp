@@ -7,6 +7,7 @@ Movable::Movable()
 	,m_currentDirection(1,0)
 	,m_nextDirection(0,0)
 	,m_map(nullptr)
+	,m_lastIntersection(0,0)
 {
 }
 
@@ -92,14 +93,16 @@ void Movable::update(sf::Time delta)
 	//MAKING ARRAY OF POSSiBLE DIRECTIONS AT GIVEN INTERSECTION
 
 	static sf::Vector2i directions[4] = { 
-		sf::Vector2i(1,0), sf::Vector2i(-1,0),
-		sf::Vector2i(0,1), sf::Vector2i(0,-1)
+		sf::Vector2i(1,0),
+		sf::Vector2i(-1,0),
+		sf::Vector2i(0,1),
+		sf::Vector2i(0,-1)
 	};
 
 	if (cellPos != m_lastIntersection)
 	{
-		if ((!m_currentDirection.y && (offset.x > -2 && offset.x < 2)) ||
-			(!m_currentDirection.x && (offset.y > -2 && offset.y < 2)))
+		if ((!m_currentDirection.y && (offset.x >-2 && offset.x <2)) ||
+			(!m_currentDirection.x && (offset.y >-2 && offset.y <2)))
 		{
 			std::array<bool, 4> possibleDirections;
 
@@ -129,4 +132,10 @@ void Movable::setDirection(sf::Vector2i direction)
 sf::Vector2i Movable::getDirection() const
 {
 	return m_currentDirection;
+}
+
+bool Movable::canMove() const
+{
+	//check if lastIntersection + nextDir results in going into wall
+	return !m_map->isWall(m_lastIntersection + m_nextDirection);
 }
