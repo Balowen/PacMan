@@ -6,7 +6,7 @@ Ghost::Ghost(sf::Texture& texture,PacMan* pacMan)
 :m_sprite(texture)
 ,m_isScared(false)
 ,m_scaredTime(sf::Time::Zero)
-,m_pacMan(m_pacMan)
+,m_pacMan(pacMan)
 {
 	m_sprite.setOrigin(7, 7);
 	m_sprite.setScale(2.5, 2.5);
@@ -87,9 +87,9 @@ void Ghost::updateDirection()
 
 	for (auto direction : directions)
 	{
-		float angle_toDirection = std::atan2(direction.x, direction.y)*(180 / 3.14);
+		float directionAngle = std::atan2(direction.x, direction.y)*(180 / 3.14);
 
-		float difference = 180 - std::abs(std::abs(angle_toDirection - angleToPac) - 180);
+		float difference = 180 - std::abs(std::abs(directionAngle - angleToPac) - 180);
 
 		directionHierarchy[difference] = direction;		//difference(k¹t) to klucz wdg ktorego posortuje
 													//best directions are first in map<>
