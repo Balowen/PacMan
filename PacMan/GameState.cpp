@@ -25,12 +25,12 @@ MenuState::MenuState(Game* game)
 
 	m_text.setFont(game->getFont());
 	m_text.setString("START GAME");
-	m_text.setPosition(640 / 2.0f, 480 / 2.0f);
+	m_text.setPosition(678 / 2.0f, 678 / 2.0f);
 	m_text.setOrigin(m_text.getLocalBounds().width / 2.0f, m_text.getLocalBounds().height / 2.0f);
 
 	m_text2.setFont(game->getFont());
 	m_text2.setString("Press space to play");
-	m_text2.setPosition(30, 430);
+	m_text2.setPosition(30, 630);
 
 }
 
@@ -39,7 +39,7 @@ GetReadyState::GetReadyState(Game* game)
 {
 	m_text.setFont(game->getFont());
 	m_text.setString("PRESS SPACE IF YOU ARE READY");
-	m_text.setPosition(640 / 2.0f, 480 / 2.0f);
+	m_text.setPosition(678 / 2.0f, 678 / 2.0f);
 	m_text.setOrigin(m_text.getLocalBounds().width / 2.0f, m_text.getLocalBounds().height / 2.0f);
 }
 
