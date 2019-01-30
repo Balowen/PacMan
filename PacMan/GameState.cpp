@@ -67,6 +67,17 @@ PlayState::PlayState(Game* game)
 	}
 }
 
+void PlayState::resetCharactersPosition()
+{
+	m_pacMan->setPosition(m_map.transform_cellToPixel(m_map.getPacManPosition()));
+	auto ghostPositions = m_map.getGhostsPositions();
+	
+	for (unsigned int i = 0; i < m_ghosts.size(); i++)
+	{
+		m_ghosts[i]->setPosition(m_map.transform_cellToPixel(ghostPositions[i]));
+	}
+}
+
 PlayState::~PlayState()
 {
 	delete m_pacMan;
@@ -133,14 +144,15 @@ void GetReadyState::pressStart()
 
 void GetReadyState::movePacman(sf::Vector2i direction)
 {// TO DO !!!!!!!!
-	if (direction.x == -1)
-		getGame()->changeGameState(GameState::Victory);	//just to check if it works
-	else if (direction.x == 1)
-		getGame()->changeGameState(GameState::Defeat);
+	//if (direction.x == -1)
+	//	getGame()->changeGameState(GameState::Victory);	//just to check if it works
+	//else if (direction.x == 1)
+	//	getGame()->changeGameState(GameState::Defeat);
 }
 
 void GetReadyState::update(sf::Time delta)
 {// TO DO !!!!!!!!
+
 }
 
 void GetReadyState::draw(sf::RenderWindow & window)
@@ -175,17 +187,43 @@ void PlayState::update(sf::Time delta)
 	sf::Vector2f offset(std::fmod(pixelPos.x, 32), std::fmod(pixelPos.y, 32));
 	offset -= sf::Vector2f(16, 16);
 
-	// KOLIZJA
-	if (offset.x < 3 && offset.x > -3 && offset.y < 3 && offset.y >-3)
+	// collecting bonuses
+	if (offset.x <= 2 && offset.x >= -2 && offset.y <= 2 && offset.y >=-2)
 	{
 		sf::Vector2i cellPos = m_map.transform_pixelToCell(pixelPos);
 
 		if (m_map.isBigDot(cellPos))	
 		{
-			//duchy uciekaja
-		}
+			//duchy sie boja
+			for (Ghost* ghost : m_ghosts)
+			{
+				ghost->setScared(sf::seconds(6));
+			}
+		 }
 
 		m_map.collectObject(cellPos);
+	}
+	// collision with ghosts
+	for (Ghost* ghost : m_ghosts)
+	{
+		if (ghost->getCollisionBox().intersects(m_pacMan->getCollisionBox()))
+		{
+			if (ghost->isScared())
+			{
+				//ghost dies -> delete him from the list of ghosts
+				m_ghosts.erase(std::find(m_ghosts.begin(), m_ghosts.end(), ghost));
+			}
+			else
+			{
+				m_pacMan->die();//pacman dies
+			}
+		}
+	}
+	if (m_pacMan->isDead())
+	{
+		m_pacMan->reset();
+		//getGame()->changeGameState(GameState::Defeat);
+		resetCharactersPosition();
 	}
 }
 

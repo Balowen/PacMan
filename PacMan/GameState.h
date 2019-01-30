@@ -78,7 +78,7 @@ public:
 	void movePacman(sf::Vector2i direction);
 	void update(sf::Time delta);
 	void draw(sf::RenderWindow& window);	
-
+	void resetCharactersPosition();
 private:
 	PacMan* m_pacMan;
 	std::vector<Ghost*> m_ghosts;	// tablica z wieloma duchami

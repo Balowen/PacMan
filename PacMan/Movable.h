@@ -22,6 +22,7 @@ public:
 
 	bool canMove() const;	//can a ghost move in this direction
 
+	sf::FloatRect getCollisionBox() const;
 protected:
 	virtual void updateDirection() {};
 

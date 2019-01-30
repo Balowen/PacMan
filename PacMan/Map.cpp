@@ -1,6 +1,6 @@
 #include "Map.h"
 #include "Capsules.h"
-
+#include <cassert>
 Map::Map()
 :m_mapSize(0,0)
 {
@@ -127,6 +127,22 @@ bool Map::isWall(sf::Vector2i position) const
 		return false;
 
 	return m_mapData[positionToIndex(position)] == Wall;	//sprawdza czy dana pozycja jest scian¹
+}
+
+bool Map::isBigDot(sf::Vector2i position) const
+{
+	return m_mapData[positionToIndex(position)] == BigDot;
+}
+
+bool Map::isFruit(sf::Vector2i position) const
+{
+	return m_mapData[positionToIndex(position)] == Fruit;
+}
+
+void Map::collectObject(sf::Vector2i position)
+{
+	assert(!isWall(position));	//sprawdza czy zwraca 0, jesli tak wyrzuca blad 
+	m_mapData[positionToIndex(position)] = Empty;
 }
 
 void Map::draw(sf::RenderTarget & target, sf::RenderStates states) const

@@ -16,6 +16,12 @@ Movable::~Movable()
 {
 }
 
+sf::FloatRect Movable::getCollisionBox() const
+{
+	sf::FloatRect bounds(2, 2, 28, 28);
+	return getTransform().transformRect(bounds);
+}
+
 void Movable::accessMap(Map* map)		//przyda sie dostep do mapy
 {
 	m_map = map;
@@ -140,3 +146,4 @@ bool Movable::canMove() const
 	//check if lastIntersection + nextDir results in going into wall
 	return !m_map->isWall(m_lastIntersection + m_nextDirection);
 }
+

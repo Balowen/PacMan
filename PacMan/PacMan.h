@@ -12,6 +12,7 @@ public:
 	bool isDead() const;
 	bool isDying() const;
 
+	void reset();
 	void update(sf::Time elapsedTime);
 
 private:
