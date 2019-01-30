@@ -78,7 +78,7 @@ void Ghost::updateDirection()
 	};
 	//http ://cpp0x.pl/kursy/Kurs-C++/Poziom-5/Kontenery-asocjacyjne-std-set-i-std-map/589
 	std::map<float, sf::Vector2i> directionHierarchy;	//zapisuje roznice katow do pacmana i odpowiadajcy kierunek, map<> sam posortuje
-
+	std::map<float, sf::Vector2i>::reverse_iterator rit;
 	float angleToPac;
 
 	sf::Vector2f distanceToPac = m_pacMan->getPosition() - getPosition();
@@ -101,14 +101,28 @@ void Ghost::updateDirection()
 		//keep going with best possible direction
 
 		auto it = directionHierarchy.begin();
-
-		do
+		rit = directionHierarchy.rbegin();
+		if (!this->isScared())
 		{
-			
+			do
+			{
+
 				setDirection(it->second);
 				it++;
-		
-		} while (!canMove());
+
+			} while (!canMove());
+		}
+		else
+		{
+
+			do
+			{
+
+				setDirection(rit->second);
+				rit++;
+
+			} while (!canMove());
+		}
 	
 }
 
