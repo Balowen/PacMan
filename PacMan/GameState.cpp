@@ -170,6 +170,23 @@ void PlayState::update(sf::Time delta)
 	{
 		ghost->update(delta);
 	}
+
+	sf::Vector2f pixelPos = m_pacMan->getPosition();
+	sf::Vector2f offset(std::fmod(pixelPos.x, 32), std::fmod(pixelPos.y, 32));
+	offset -= sf::Vector2f(16, 16);
+
+	// KOLIZJA
+	if (offset.x < 3 && offset.x > -3 && offset.y < 3 && offset.y >-3)
+	{
+		sf::Vector2i cellPos = m_map.transform_pixelToCell(pixelPos);
+
+		if (m_map.isBigDot(cellPos))	
+		{
+			//duchy uciekaja
+		}
+
+		m_map.collectObject(cellPos);
+	}
 }
 
 void PlayState::draw(sf::RenderWindow & window)

@@ -20,6 +20,12 @@ public:
 
 	bool isWall(sf::Vector2i position) const;	// zwraca czy dana pozycja jest sciana
 	sf::Vector2i getSize() const;
+
+	bool isBigDot(sf::Vector2i position) const;
+	bool isFruit(sf::Vector2i position) const;
+	void collectObject(sf::Vector2i position);
+
+
 private:
 	enum singleCell
 	{
