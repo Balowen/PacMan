@@ -18,7 +18,7 @@ Movable::~Movable()
 
 sf::FloatRect Movable::getCollisionBox() const
 {
-	sf::FloatRect bounds(2, 2, 28, 28);
+	sf::FloatRect bounds(3, 3, 22, 22);
 	return getTransform().transformRect(bounds);
 }
 
