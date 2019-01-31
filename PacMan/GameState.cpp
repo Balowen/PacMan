@@ -68,23 +68,24 @@ PlayState::PlayState(Game* game)
 	m_screen.create(672, 672);
 
 	m_pointsText.setFont(game->getFont());
-	m_pointsText.setCharacterSize(16);
-	m_pointsText.setPosition(10, 672);
+	m_pointsText.setCharacterSize(20);
+	m_pointsText.setPosition(10, 675);
 	m_pointsText.setString("0 points");
 
 	m_currentLevelText.setFont(game->getFont());	
-	m_currentLevelText.setCharacterSize(16);	
-	m_currentLevelText.setPosition(100, 672);
+	m_currentLevelText.setCharacterSize(20);	
+	m_currentLevelText.setPosition(180, 675);
 	m_currentLevelText.setString("1 level");
 
 	for (auto& lives : m_livesSprite)
 	{
 		lives.setTexture(game->getTexture());
-		lives.setTextureRect(sf::IntRect(3, 1, 14, 14));
+		lives.setScale(2, 2);
+		lives.setTextureRect(sf::IntRect(19, 1, 14, 14));
 	}
-	m_livesSprite[0].setPosition(sf::Vector2f(610, 672));
-	m_livesSprite[1].setPosition(sf::Vector2f(630, 672));
-	m_livesSprite[2].setPosition(sf::Vector2f(650, 672));
+	m_livesSprite[0].setPosition(sf::Vector2f(580, 675));
+	m_livesSprite[1].setPosition(sf::Vector2f(610, 675));
+	m_livesSprite[2].setPosition(sf::Vector2f(640, 675));
 
 
 }
@@ -264,7 +265,8 @@ void PlayState::draw(sf::RenderWindow & window)
 	window.draw(m_pointsText);
 	window.draw(m_currentLevelText);
 	
-
+	for (unsigned int i = 0; i < 3; i++)
+		window.draw(m_livesSprite[i]);
 }
 
 void VictoryState::pressStart()

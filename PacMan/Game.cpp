@@ -5,7 +5,7 @@
 //and drawwing/drawing
 
 Game::Game()
-:m_window(sf::VideoMode(672, 700), "PacMan", sf::Style::Close)
+:m_window(sf::VideoMode(672, 705), "PacMan", sf::Style::Close)
 {
 	if (!m_font.loadFromFile("assets/font.ttf"))
 		throw std::runtime_error("Blad wczytywania czcionki");
