@@ -46,11 +46,14 @@ void Ghost::update(sf::Time elapsedTime)
 	
 	if (!m_isScared)
 	{
+		m_pacMan->setVelocity(50.0f);
 		m_chaseAnimation.update(elapsedTime);
 		m_chaseAnimation.animate(m_sprite);
 	}
 	else
 	{
+		//float currentVelocity = m_pacMan->getVelocity();
+		m_pacMan->setVelocity(60.0f);
 		m_scaredAnimation.update(elapsedTime);
 		m_scaredAnimation.animate(m_sprite);
 	}

@@ -1,5 +1,5 @@
 #include "PacMan.h"
-
+#include "Ghost.h"
 
 
 PacMan::PacMan(sf::Texture& texture)

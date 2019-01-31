@@ -129,6 +129,11 @@ bool Map::isWall(sf::Vector2i position) const
 	return m_mapData[positionToIndex(position)] == Wall;	//sprawdza czy dana pozycja jest scian¹
 }
 
+bool Map::isSmallDot(sf::Vector2i position) const
+{
+	return m_mapData[positionToIndex(position)] == Dot;
+}
+
 bool Map::isBigDot(sf::Vector2i position) const
 {
 	return m_mapData[positionToIndex(position)] == BigDot;
@@ -143,6 +148,18 @@ void Map::collectObject(sf::Vector2i position)
 {
 	assert(!isWall(position));	//sprawdza czy zwraca 0, jesli tak wyrzuca blad 
 	m_mapData[positionToIndex(position)] = Empty;
+}
+
+int Map::getRemainingCapsules() const
+{
+	int remainingCapsules = 0;
+
+	for (unsigned int i = 0; i < m_mapData.size(); i++)
+	{
+		if (m_mapData[i] == Dot || m_mapData[i] == BigDot)
+			remainingCapsules++;
+	}
+	return remainingCapsules;
 }
 
 void Map::draw(sf::RenderTarget & target, sf::RenderStates states) const

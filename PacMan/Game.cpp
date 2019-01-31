@@ -19,8 +19,8 @@ Game::Game()
 	m_gameStates[GameState::State::Menu] = new MenuState(this);
 	m_gameStates[GameState::State::GetReady] = new GetReadyState(this);
 	m_gameStates[GameState::State::Play] = new PlayState(this);
-	m_gameStates[GameState::State::Victory] = new VictoryState(this);
-	m_gameStates[GameState::State::Defeat] = new DefeatState(this);
+	m_gameStates[GameState::State::Victory] = new VictoryState(this, m_gameStates[GameState::Play]);
+	m_gameStates[GameState::State::Defeat] = new DefeatState(this, m_gameStates[GameState::Play]);
 
 	changeGameState(GameState::State::Menu);	//initial state, when game launches
 }

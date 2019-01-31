@@ -79,22 +79,27 @@ public:
 	void update(sf::Time delta);
 	void draw(sf::RenderWindow& window);	
 	void resetCharactersPosition();
+
+	void resetLives();
+	
 private:
 	PacMan* m_pacMan;
 	std::vector<Ghost*> m_ghosts;	// tablica z wieloma duchami
-	
+
 	Map m_map;
 	sf::RenderTexture m_screen;	//tekstura z labiryntem i hudem
 	sf::Text m_pointsText;	//tekst do wyswietlania punktow
-	sf::Text m_currentLevelText;
+	sf::Text m_livesLeftText;
 
 	sf::Sprite m_livesSprite[3];	//sprite wyswietlajacy ile zostalo zyc
+	int m_lives;
+	int m_pointsCount;
 };
 
 class VictoryState : public GameState
 {
 public:
-	VictoryState(Game* game);
+	VictoryState(Game* game, GameState* playState);
 
 	void pressStart();
 	void movePacman(sf::Vector2i direction);
@@ -103,13 +108,14 @@ public:
 
 private:
 	sf::Text m_text;
+	PlayState* m_playState;
 
 };
 
 class DefeatState : public GameState
 {
 public:
-	DefeatState(Game* game);
+	DefeatState(Game* game,GameState* playState);
 
 	void pressStart();
 	void movePacman(sf::Vector2i direction);
@@ -119,4 +125,6 @@ public:
 private:
 	sf::Text m_text;
 	sf::Text m_text2;
+
+	PlayState* m_playState;
 };

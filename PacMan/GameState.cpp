@@ -48,6 +48,8 @@ PlayState::PlayState(Game* game)
 //m_pacMan(game->getTexture())
 //,m_ghost(game->getTexture())
 ,m_pacMan(nullptr)
+,m_lives(3)
+,m_pointsCount(0)
 {
 	//m_pacMan.move(100, 100);
 	//m_ghost.move(300, 300);
@@ -70,12 +72,13 @@ PlayState::PlayState(Game* game)
 	m_pointsText.setFont(game->getFont());
 	m_pointsText.setCharacterSize(20);
 	m_pointsText.setPosition(10, 675);
-	m_pointsText.setString("0 points");
+	
 
-	m_currentLevelText.setFont(game->getFont());	
-	m_currentLevelText.setCharacterSize(20);	
-	m_currentLevelText.setPosition(180, 675);
-	m_currentLevelText.setString("1 level");
+	m_livesLeftText.setFont(game->getFont());
+	m_livesLeftText.setCharacterSize(20);
+	m_livesLeftText.setPosition(450, 675);
+	m_livesLeftText.setString("Lives left: ");
+
 
 	for (auto& lives : m_livesSprite)
 	{
@@ -109,8 +112,9 @@ PlayState::~PlayState()
 		delete ghost;
 }
 
-VictoryState::VictoryState(Game* game)
+VictoryState::VictoryState(Game* game, GameState* playState)
 :GameState(game)
+,m_playState(static_cast<PlayState*>(playState))
 {
 	m_text.setFont(game->getFont());
 	m_text.setString("VICTORY");
@@ -120,8 +124,9 @@ VictoryState::VictoryState(Game* game)
 	
 }
 
-DefeatState::DefeatState(Game* game)
+DefeatState::DefeatState(Game* game, GameState* playState)
 :GameState(game)
+, m_playState(static_cast<PlayState*>(playState))
 {
 	m_text.setFont(game->getFont());
 	m_text.setString("You lost");
@@ -183,6 +188,12 @@ void GetReadyState::draw(sf::RenderWindow & window)
 	window.draw(m_text);
 }
 
+void PlayState::resetLives()
+{
+	m_lives = 3;
+}
+
+
 void PlayState::pressStart()
 {// TO DO !!!!!!!!
 	//m_pacMan.die();
@@ -214,15 +225,21 @@ void PlayState::update(sf::Time delta)
 	if (offset.x <= 2 && offset.x >= -2 && offset.y <= 2 && offset.y >=-2)
 	{
 		sf::Vector2i cellPos = m_map.transform_pixelToCell(pixelPos);
-
-		if (m_map.isBigDot(cellPos))	
+		
+		if (m_map.isSmallDot(cellPos))
+			m_pointsCount += 10;
+		else if (m_map.isBigDot(cellPos))	
 		{
 			//duchy sie boja
 			for (Ghost* ghost : m_ghosts)
 			{
 				ghost->setScared(sf::seconds(6));
 			}
+			m_pointsCount += 20;
 		 }
+		
+		// TO DO:
+		// else if m_map is FRUIT
 
 		m_map.collectObject(cellPos);
 	}
@@ -235,6 +252,7 @@ void PlayState::update(sf::Time delta)
 			{
 				//ghost dies -> delete him from the list of ghosts
 				m_ghosts.erase(std::find(m_ghosts.begin(), m_ghosts.end(), ghost));
+				m_pointsCount += 200;
 			}
 			else
 			{
@@ -245,9 +263,24 @@ void PlayState::update(sf::Time delta)
 	if (m_pacMan->isDead())
 	{
 		m_pacMan->reset();
-		//getGame()->changeGameState(GameState::Defeat);
-		resetCharactersPosition();
+		m_lives--;	//lives counter (default = 3 )
+		if (m_lives < 0)
+		{
+			getGame()->changeGameState(GameState::Defeat);
+		}
+		else
+		{
+			resetCharactersPosition();
+		}
 	}
+
+	if (m_map.getRemainingCapsules() == 0)
+	{
+		getGame()->changeGameState(GameState::Victory);
+	}
+
+	//Update hud
+	m_pointsText.setString("Points : " + std::to_string(m_pointsCount));
 }
 
 void PlayState::draw(sf::RenderWindow & window)
@@ -263,9 +296,9 @@ void PlayState::draw(sf::RenderWindow & window)
 	window.draw(sf::Sprite(m_screen.getTexture()));
 
 	window.draw(m_pointsText);
-	window.draw(m_currentLevelText);
+	window.draw(m_livesLeftText);
 	
-	for (unsigned int i = 0; i < 3; i++)
+	for (unsigned int i = 0; i < m_lives; i++)
 		window.draw(m_livesSprite[i]);
 }
 
@@ -292,6 +325,8 @@ void VictoryState::draw(sf::RenderWindow & window)
 
 void DefeatState::pressStart()
 {
+	m_playState->resetLives();
+	
 	getGame()->changeGameState(GameState::Menu);
 }
 
