@@ -84,6 +84,11 @@ private:
 	std::vector<Ghost*> m_ghosts;	// tablica z wieloma duchami
 	
 	Map m_map;
+	sf::RenderTexture m_screen;	//tekstura z labiryntem i hudem
+	sf::Text m_pointsText;	//tekst do wyswietlania punktow
+	sf::Text m_currentLevelText;
+
+	sf::Sprite m_livesSprite[3];	//sprite wyswietlajacy ile zostalo zyc
 };
 
 class VictoryState : public GameState

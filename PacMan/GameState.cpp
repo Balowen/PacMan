@@ -25,7 +25,7 @@ MenuState::MenuState(Game* game)
 
 	m_text.setFont(game->getFont());
 	m_text.setString("START GAME");
-	m_text.setPosition(678 / 2.0f, 678 / 2.0f);
+	m_text.setPosition(678 / 2.0f, 700 / 2.0f);
 	m_text.setOrigin(m_text.getLocalBounds().width / 2.0f, m_text.getLocalBounds().height / 2.0f);
 
 	m_text2.setFont(game->getFont());
@@ -39,7 +39,7 @@ GetReadyState::GetReadyState(Game* game)
 {
 	m_text.setFont(game->getFont());
 	m_text.setString("PRESS SPACE IF YOU ARE READY");
-	m_text.setPosition(678 / 2.0f, 678 / 2.0f);
+	m_text.setPosition(678 / 2.0f, 700 / 2.0f);
 	m_text.setOrigin(m_text.getLocalBounds().width / 2.0f, m_text.getLocalBounds().height / 2.0f);
 }
 
@@ -65,6 +65,28 @@ PlayState::PlayState(Game* game)
 
 		m_ghosts.push_back(ghost);
 	}
+	m_screen.create(672, 672);
+
+	m_pointsText.setFont(game->getFont());
+	m_pointsText.setCharacterSize(16);
+	m_pointsText.setPosition(10, 672);
+	m_pointsText.setString("0 points");
+
+	m_currentLevelText.setFont(game->getFont());	
+	m_currentLevelText.setCharacterSize(16);	
+	m_currentLevelText.setPosition(100, 672);
+	m_currentLevelText.setString("1 level");
+
+	for (auto& lives : m_livesSprite)
+	{
+		lives.setTexture(game->getTexture());
+		lives.setTextureRect(sf::IntRect(3, 1, 14, 14));
+	}
+	m_livesSprite[0].setPosition(sf::Vector2f(610, 672));
+	m_livesSprite[1].setPosition(sf::Vector2f(630, 672));
+	m_livesSprite[2].setPosition(sf::Vector2f(650, 672));
+
+
 }
 
 void PlayState::resetCharactersPosition()
@@ -229,11 +251,20 @@ void PlayState::update(sf::Time delta)
 
 void PlayState::draw(sf::RenderWindow & window)
 {// TO DO !!!!!!!!
-	window.draw(m_map);
-	window.draw(*m_pacMan);
+	m_screen.clear();
+	m_screen.draw(m_map);
+	m_screen.draw(*m_pacMan);
 	
 	for (Ghost* ghost : m_ghosts)
-		window.draw(*ghost);
+		m_screen.draw(*ghost);
+
+	m_screen.display();
+	window.draw(sf::Sprite(m_screen.getTexture()));
+
+	window.draw(m_pointsText);
+	window.draw(m_currentLevelText);
+	
+
 }
 
 void VictoryState::pressStart()
