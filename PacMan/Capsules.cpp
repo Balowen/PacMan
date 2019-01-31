@@ -14,7 +14,7 @@ sf::CircleShape createBigDot()
 {
 	sf::CircleShape bigDot;
 	bigDot.setRadius(6);
-	bigDot.setFillColor(sf::Color::White);		//---- TO CHECK LATER
+	bigDot.setFillColor(sf::Color::White);		
 	bigDot.setOrigin(6, 6);	// center the origin, not sure if right 
 
 	return bigDot;

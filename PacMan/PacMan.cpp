@@ -8,7 +8,7 @@ PacMan::PacMan(sf::Texture& texture)
 ,m_isDead(false)
 {
 	m_sprite.setOrigin(7, 7);		// Pacman sprite is 14 x 14
-	m_sprite.setScale(2, 2);
+	m_sprite.setScale(2, 2);		//updating the scale to fit the tiles of map
 
 	m_aliveAnimation.addFrame(sf::IntRect(3, 1, 14, 14));
 	m_aliveAnimation.addFrame(sf::IntRect(19, 1, 14, 14));
@@ -77,7 +77,7 @@ void PacMan::die()
 	}
 }
 
-void PacMan::reset()
+void PacMan::reset()		//reseting pacman after dying
 {
 	m_isDying = false;
 	m_isDead = false;
